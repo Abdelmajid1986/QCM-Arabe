@@ -1,94 +1,116 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>QCM - Expressions Arabes</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; direction: rtl; text-align: right; }
-    h1 { color: #2c3e50; }
-    .question { margin-bottom: 20px; }
-    button { padding: 10px 20px; margin-top: 20px; background-color: #3498db; color: white; border: none; cursor: pointer; border-radius: 5px; }
-    button:hover { background-color: #2980b9; }
-    .result { margin-top: 20px; font-weight: bold; }
-  </style>
+    <meta charset="UTF-8">
+    <title>QCM - Mois en arabe</title>
+    <style>
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: red;
+            font-weight: bold;
+        }
+        .correction {
+            margin-top: 10px;
+        }
+        #timer {
+            font-size: 20px;
+            font-weight: bold;
+            color: blue;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
+    <h1>QCM : Les mois de l'année en arabe</h1>
 
-<h1>اختبار - تعبيرات عربية</h1>
-<form id="quizForm">
+    <div id="timer">Temps restant : 05:00</div>
 
-  <!-- 15 questions -->
-  <div class="question">
-    <p>1. أين موقف الحافلة؟</p>
-    <input type="radio" name="q1" value="b"> ب) أَيْنَ مَوْقِفُ الْحَافِلَةِ<br>
-    <input type="radio" name="q1" value="a"> أ) أَيْنَ الْمَكْتَبُ<br>
-    <input type="radio" name="q1" value="c"> ج) أَيْنَ الْمَطَارُ<br>
-    <input type="radio" name="q1" value="d"> د) أَيْنَ الْمَطْعَمُ<br>
-  </div>
+    <form id="qcmForm">
+        <ol>
+            <!-- Toutes les questions (mêmes questions que précédemment) -->
+            <!-- Pour raccourcir ici, tu peux copier les questions du précédent code -->
+            <!-- Je mets quelques exemples, mais tu peux coller ton bloc de questions complet -->
+            <li>
+                Comment dit-on "janvier" en arabe (version standard) ?<br>
+                <input type="radio" name="q1" value="a"> يُونْيُو (Yūnyū)<br>
+                <input type="radio" name="q1" value="b"> يَنَايِرُ (Yanāyir)<br>
+                <input type="radio" name="q1" value="c"> كَانُونُ ٱلثَّانِي (Kānūn Ath-Thānī)
+            </li><br>
 
-  <div class="question">
-    <p>2. متى تصل الحافلة؟</p>
-    <input type="radio" name="q2" value="c"> ج) مَتَى تَصِلُ الْحَافِلَةُ<br>
-    <input type="radio" name="q2" value="a"> أ) كَمْ تَذْكِرَةٌ<br>
-    <input type="radio" name="q2" value="b"> ب) أَيْنَ الْمَطَارُ<br>
-    <input type="radio" name="q2" value="d"> د) أَيْنَ مَوْقِفُ التَّاكْسِي<br>
-  </div>
+            <!-- (COLLER ICI TOUTES TES AUTRES QUESTIONS) -->
 
-  <div class="question">
-    <p>3. أحتاج إلى طبيب.</p>
-    <input type="radio" name="q3" value="a"> أ) أَحْتَاجُ إِلَى طَبِيبٍ<br>
-    <input type="radio" name="q3" value="b"> ب) أَيْنَ الْبَيْتُ<br>
-    <input type="radio" name="q3" value="c"> ج) كَمْ السَّعْرُ<br>
-    <input type="radio" name="q3" value="d"> د) كَيْفَ أَذْهَبُ<br>
-  </div>
+        </ol>
+        <button type="button" onclick="corriger()">Valider</button>
+    </form>
 
-  <div class="question">
-    <p>4. كم الثمن؟</p>
-    <input type="radio" name="q4" value="c"> ج) كَمْ السِّعْرُ<br>
-    <input type="radio" name="q4" value="a"> أ) أَيْنَ الْمَتْجَرُ<br>
-    <input type="radio" name="q4" value="b"> ب) مَتَى تُفْتَحُ الْمَكْتَبَاتُ<br>
-    <input type="radio" name="q4" value="d"> د) أُرِيدُ مُسَاعَدَةً<br>
-  </div>
+    <div id="resultat" class="correction"></div>
 
-  <div class="question">
-    <p>5. هل تتكلم العربية؟</p>
-    <input type="radio" name="q5" value="d"> د) هَلْ تَتَكَلَّمُ الْعَرَبِيَّةَ<br>
-    <input type="radio" name="q5" value="a"> أ) كَيْفَ حَالُكَ<br>
-    <input type="radio" name="q5" value="b"> ب) مَتَى الرِّحْلَةُ<br>
-    <input type="radio" name="q5" value="c"> ج) أَيْنَ الْبَيْتُ<br>
-  </div>
+    <script>
+        const reponses = {
+            q1: "b",
+            q2: "c",
+            q3: "a",
+            q4: "b",
+            q5: "b",
+            q6: "b",
+            q7: "a",
+            q8: "a",
+            q9: "b",
+            q10: "a",
+            q11: "b",
+            q12: "a",
+            q13: "b",
+            q14: "b",
+            q15: "b"
+        };
 
-  <!-- Questions 6 à 15 similaires... pour gagner de l'espace -->
+        let tempsRestant = 300; // 5 minutes = 300 secondes
+        let timerInterval = setInterval(updateTimer, 1000);
 
-  <button type="button" onclick="calculateScore()">تصحيح</button>
+        function updateTimer() {
+            const minutes = Math.floor(tempsRestant / 60);
+            const secondes = tempsRestant % 60;
+            document.getElementById('timer').textContent = `Temps restant : ${minutes.toString().padStart(2, '0')}:${secondes.toString().padStart(2, '0')}`;
+            tempsRestant--;
 
-</form>
+            if (tempsRestant < 0) {
+                clearInterval(timerInterval);
+                alert("Temps écoulé ! Votre test va être corrigé.");
+                corriger();
+            }
+        }
 
-<div class="result" id="result"></div>
+        function corriger() {
+            clearInterval(timerInterval); // Arrête le chrono au cas où
+            let score = 0;
+            const total = Object.keys(reponses).length;
+            const resultatDiv = document.getElementById("resultat");
+            resultatDiv.innerHTML = "";
 
-<script>
-function calculateScore() {
-  var score = 0;
+            for (let q in reponses) {
+                const radios = document.getElementsByName(q);
+                let trouve = false;
 
-  var answers = {
-    q1: "b",
-    q2: "c",
-    q3: "a",
-    q4: "c",
-    q5: "d"
-    // Ajouter aussi q6 jusqu'à q15 ici
-  };
-
-  var form = document.forms["quizForm"];
-  for (var question in answers) {
-    if (form[question] && form[question].value === answers[question]) {
-      score++;
-    }
-  }
-
-  document.getElementById("result").innerText = "نتيجتك: " + score + " / 15";
-}
-</script>
-
+                for (let i = 0; i < radios.length; i++) {
+                    if (radios[i].checked) {
+                        trouve = true;
+                        if (radios[i].value === reponses[q]) {
+                            score++;
+                            resultatDiv.innerHTML += `<p class="correct">Question ${q.substring(1)} : Correct</p>`;
+                        } else {
+                            resultatDiv.innerHTML += `<p class="incorrect">Question ${q.substring(1)} : Incorrect</p>`;
+                        }
+                    }
+                }
+                if (!trouve) {
+                    resultatDiv.innerHTML += `<p class="incorrect">Question ${q.substring(1)} : Non répondu</p>`;
+                }
+            }
+            resultatDiv.innerHTML += `<hr><h2>Votre score : ${score} / ${total}</h2>`;
+        }
+    </script>
 </body>
 </html>
